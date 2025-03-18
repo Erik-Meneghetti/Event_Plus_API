@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "rA6PlDPvebXZvtDezYCM0f1+a77Wq9vyK1sPVGDGFyg=",
+  "Source": "EventPlusAPI",
+  "BasePath": "_content/EventPlusAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
