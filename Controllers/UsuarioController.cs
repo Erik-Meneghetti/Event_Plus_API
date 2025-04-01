@@ -1,10 +1,10 @@
-﻿using EventPlusAPI.Domains;
-using EventPlusAPI.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using webapi.event_.Domains;
+using webapi.event_.DTO;
+using webapi.event_.Interfaces;
 
-namespace EventPlusAPI.Controllers
+namespace webapi.event_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -12,60 +12,24 @@ namespace EventPlusAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioRepository _usuarioRepository;
-
         public UsuarioController(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
-        }   
+        }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Post(Usuario novoUsuario)
+        [HttpPost]
+        public IActionResult Post(Usuarios usuario)
         {
             try
             {
-                _usuarioRepository.Cadastrar(novoUsuario);
-                return Created();
+                _usuarioRepository.Cadastrar(usuario);
+
+                return StatusCode(201, usuario);
             }
             catch (Exception error)
             {
                 return BadRequest(error.Message);
             }
         }
-
-        [HttpGet]
-        public IActionResult GetById (Guid id)
-        {
-            try
-            {
-                Usuario novoUsuario = _usuarioRepository.BuscarPorId(id);
-                return Ok(novoUsuario);
-            }
-            catch (Exception error)
-            {
-                return BadRequest(error.Message);
-            }
-        }
-
-        [HttpGet("BuscarPorEmailESenha/{email},{senha}")]
-        public IActionResult Get(string email, string senha)
-        {
-            try
-            {
-                Usuario novoUsuario = _usuarioRepository.BuscarPorEmailESenha(email, senha);
-                return Ok(novoUsuario);
-            }
-            catch (Exception error)
-            {
-
-                return BadRequest(error.Message);
-            }
-        }
-
-
-
-
-
-
     }
 }
